@@ -28,32 +28,43 @@ An offline-first inventory and point-of-sale management system built for superma
 
 ## Getting Started
 
-### Prerequisites
-- Node.js ≥ 18
-- Python ≥ 3.10
+### Option A: Run with Docker (Recommended)
+You can run the entire application (PostgreSQL + FastAPI Backend + React Frontend) with a single command.
+
+1. Create your environment variables:
+   ```bash
+   cp .env.example .env
+   ```
+2. Start the containers:
+   ```bash
+   docker-compose up --build -d
+   ```
+3. Access the application:
+   - **Frontend App**: http://localhost
+   - **Backend API Docs**: http://localhost:8000/docs
+
+*To stop the app, run `docker-compose down`.*
 
 ---
 
-### 1. Backend
+### Option B: Local Development (Without Docker)
+
+#### 1. Backend
 
 ```bash
 cd backend
 python3 -m venv venv
 source venv/bin/activate
-pip install fastapi uvicorn sqlalchemy passlib[bcrypt] python-multipart
+pip install -r requirements.txt
 ```
 
-Start the server:
+Start the server (uses local SQLite by default):
 ```bash
 # From the project root
 backend/venv/bin/python3 -m uvicorn backend.main:app --reload --port 8000
 ```
 
-API docs → **http://localhost:8000/docs**
-
----
-
-### 2. Frontend
+#### 2. Frontend
 
 ```bash
 cd frontend
