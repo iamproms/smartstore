@@ -4,8 +4,12 @@ from sqlalchemy.orm import Session
 from typing import List
 from datetime import datetime, date
 
-from .database import engine, get_db
-from . import models, schemas
+try:
+    from .database import engine, get_db
+    from . import models, schemas
+except ImportError:
+    from database import engine, get_db  # type: ignore
+    import models, schemas  # type: ignore
 
 # Create all tables
 models.Base.metadata.create_all(bind=engine)
